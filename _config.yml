@@ -7,10 +7,12 @@ author:
   email: lingaoqiming2104@sina.com
   github: lingaoqiming
 
-markdown: rdiscount
-permalink:  none
-production_url: http://lingaoqiming.github.io/
-img_url: http://lingaoqiming.github.io//images
+markdown: kramdown
+permalink: none
+baseurl: /lingaoqiming.github.com
+url: https://aeieli.github.io
+production_url: https://aeieli.github.io/lingaoqiming.github.com/
+img_url: https://aeieli.github.io/lingaoqiming.github.com/images
 
 collections:
   characters:
