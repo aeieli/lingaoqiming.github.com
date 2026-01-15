@@ -792,12 +792,17 @@ footer .credits.right {
   }
 
   #header .title {
-    font-size: 24px;
-    padding: 8px 15px;
+    font-size: 20px;
+    padding: 8px 10px;
+  }
+
+  #header .title img {
+    width: 40px;
+    height: 40px;
   }
 
   #header a {
-    padding: 0 15px;
+    padding: 0 8px;
   }
 
   section {
@@ -806,10 +811,6 @@ footer .credits.right {
   }
 
   nav {
-    display: none;
-  }
-
-  #sidebar {
     display: none;
   }
 
