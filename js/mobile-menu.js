@@ -1,6 +1,6 @@
 /**
  * Mobile Menu Toggle
- * Handles hamburger menu for mobile navigation
+ * Handles hamburger menu for responsive navigation based on screen width
  */
 (function() {
   'use strict';
@@ -9,6 +9,11 @@
   var sidebar = null;
   var overlay = null;
   var isOpen = false;
+  var MOBILE_BREAKPOINT = 900; // Show hamburger menu below this width
+
+  function isMobileView() {
+    return window.innerWidth <= MOBILE_BREAKPOINT;
+  }
 
   function init() {
     menuToggle = document.querySelector('.menu-toggle');
@@ -35,6 +40,16 @@
     sidebarLinks.forEach(function(link) {
       link.addEventListener('click', closeMenu);
     });
+
+    // Handle resize events
+    window.addEventListener('resize', handleResize);
+    handleResize();
+  }
+
+  function handleResize() {
+    if (!isMobileView() && isOpen) {
+      closeMenu();
+    }
   }
 
   function toggleMenu() {

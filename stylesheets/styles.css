@@ -1,3 +1,15 @@
+/* CSS Variables for theming */
+:root {
+  --reader-bg: #101010;
+  --reader-text: #f0e7d5;
+  --reader-header-bg: #353535;
+  --reader-sidebar-bg: #1a1a1a;
+  --reader-link: #DF8744;
+  --reader-border: #434343;
+  --reader-font-size: 18px;
+  --reader-line-height: 1.7;
+}
+
 @font-face {
   font-family: 'OpenSansLight';
   src: url("../fonts/OpenSans-Light-webfont.eot");
@@ -238,28 +250,27 @@ table {
 body {
   padding: 0px 0 20px 0px;
   margin: 0px;
-  font: 18px/1.5 "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #f0e7d5;
+  font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: var(--reader-font-size);
+  line-height: var(--reader-line-height);
+  color: var(--reader-text);
+  background-color: var(--reader-bg);
   font-weight: normal;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAgMAAAANjH3HAAAACVBMVEUaGhohISElJSUh9lebAAAB20lEQVRIx4XWuZXDMAwE0C0SAQtggIIYoAAEU+aKOHhYojTrYP2+QfOW/5QIJOih/q8HwF/pb3EX+UPIveYcQGgEHiu9hI+ihEc5Jz5KBIlRRRaJ1JtoSAl5Hw96hLB1/up1tnIXOck5jZQy+3iU2hAOKSH1JvwxHsp+5TLF5MOl1/MQXsVs1miXc+KDbYydyMeUgpPQreZ7fWidbNhkXNJSeAhc6qHmHD8AYovunYyEACWEbyIhNeB9fRrH3hFi0bGPLuEW7xCNaohw1vAlS805nfsrTspclB/hVdoqusg53eH7FWot+wjYpOViX8KbFFKTwlnzvj65P9H/vD0/hibYBGhPwlPO8TmxRsaxsNnrUmUXpNhirlJMPr6Hqq9k5Xn/8iYQHYIuQsWFC6Z87IOxLxHphSY4SpuiU87xJnJr5axfeRd+lnMExXpEWPpuZ1v7qZdNBOjiHzDREHX5fs5Zz9p6X0vVKbKKchlSl5rv+3p//FJ/PYvoKryI8vs+2G9lzRmnEKkh+BU8yDk515jDj/HAswu7CCz6U/Mxb/PnC9N41ndpU4hUU7JGk/C9PmP/M2xZYdvBW2PObyf1IUiIzoHmHW9yTncliYs9A9tVNppdShfgQaTLMf+j3X723tLeHgAAAABJRU5ErkJggg==) !important;
-  background-clip: border-box !important;
-  background-origin: padding-box !important;
-  background-repeat: repeat !important;
-  background-size: auto !important;
-  background-position: left top !important;
-  background-attachment: scroll !important;
-  /*
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #101010), color-stop(100%, #050505));
-  background: -webkit-linear-gradient(#101010, #050505);
-  background: -moz-linear-gradient(#101010, #050505);
-  background: -o-linear-gradient(#101010, #050505);
-  background: -ms-linear-gradient(#101010, #050505);
-  background: linear-gradient(#101010, #050505);
-  */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark theme background pattern */
+body[data-theme="dark"] {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAgMAAAANjH3HAAAACVBMVEUaGhohISElJSUh9lebAAAB20lEQVRIx4XWuZXDMAwE0C0SAQtggIIYoAAEU+aKOHhYojTrYP2+QfOW/5QIJOih/q8HwF/pb3EX+UPIveYcQGgEHiu9hI+ihEc5Jz5KBIlRRRaJ1JtoSAl5Hw96hLB1/up1tnIXOck5jZQy+3iU2hAOKSH1JvwxHsp+5TLF5MOl1/MQXsVs1miXc+KDbYydyMeUgpPQreZ7fWidbNhkXNJSeAhc6qHmHD8AYovunYyEACWEbyIhNeB9fRrH3hFi0bGPLuEW7xCNaohw1vAlS805nfsrTspclB/hVdoqusg53eH7FWot+wjYpOViX8KbFFKTwlnzvj65P9H/vD0/hibYBGhPwlPO8TmxRsaxsNnrUmUXpNhirlJMPr6Hqq9k5Xn/8iYQHYIuQsWFC6Z87IOxLxHphSY4SpuiU87xJnJr5axfeRd+lnMExXpEWPpuZ1v7qZdNBOjiHzDREHX5fs5Zz9p6X0vVKbKKchlSl5rv+3p//FJ/PYvoKryI8vs+2G9lzRmnEKkh+BU8yDk515jDj/HAswu7CCz6U/Mxb/PnC9N41ndpU4hUU7JGk/C9PmP/M2xZYdvBW2PObyf1IUiIzoHmHW9yTncliYs9A9tVNppdShfgQaTLMf+j3X723tLeHgAAAABJRU5ErkJggg==);
+}
+
+body[data-theme="light"],
+body[data-theme="sepia"] {
+  background-image: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #e8e8e8;
+  color: var(--reader-text);
   margin: 0 0 10px;
   font-family: 'Oswald', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
@@ -303,13 +314,14 @@ h4, h5, h6 {
 
 
 a {
-  color: #DF8744;
+  color: var(--reader-link);
   font-weight: 400;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #FFB774;
+  filter: brightness(1.2);
 }
 
 a small {
@@ -463,12 +475,10 @@ dt {
   height: 60px;
   width: 100%;
   position: fixed;
-  background: url(../images/nav-bg.gif) #353535;
-  border-bottom: 4px solid #434343;
-  -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-  -o-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  background-color: var(--reader-header-bg);
+  border-bottom: 4px solid var(--reader-border);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 #header .title {
@@ -636,7 +646,8 @@ footer .credits.right {
   display: none;
 }
 
-@media print, screen and (max-width: 720px) {
+/* Tablet and mobile - 900px breakpoint for iPad etc */
+@media print, screen and (max-width: 900px) {
   #title .credits {
     display: block;
     width: 100%;
@@ -944,5 +955,270 @@ footer .credits.right {
 
   .swipe-indicator.active {
     opacity: 1;
+  }
+}
+
+/* ========================================
+   Reader Settings Panel
+   ======================================== */
+
+/* Settings toggle button */
+.settings-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--reader-text);
+  opacity: 0.7;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.settings-toggle:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.settings-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Settings overlay */
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1100;
+}
+
+.settings-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Settings panel */
+.settings-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--reader-header-bg);
+  border-top: 1px solid var(--reader-border);
+  border-radius: 16px 16px 0 0;
+  padding: 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  z-index: 1101;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.settings-panel.active {
+  transform: translateY(0);
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--reader-border);
+}
+
+.settings-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--reader-text);
+}
+
+.settings-close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--reader-text);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.settings-close:hover {
+  opacity: 1;
+}
+
+.settings-content {
+  padding: 20px;
+}
+
+.settings-section {
+  margin-bottom: 24px;
+}
+
+.settings-section:last-child {
+  margin-bottom: 0;
+}
+
+.settings-label {
+  font-size: 14px;
+  color: var(--reader-text);
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+
+/* Theme buttons */
+.theme-options {
+  display: flex;
+  gap: 12px;
+}
+
+.theme-btn {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid var(--reader-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--reader-text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.theme-btn:hover {
+  border-color: var(--reader-link);
+}
+
+.theme-btn.active {
+  border-color: var(--reader-link);
+  background: var(--reader-link);
+  color: #fff;
+}
+
+/* Slider controls */
+.settings-slider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--reader-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--reader-text);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+}
+
+.slider-btn:hover {
+  border-color: var(--reader-link);
+  color: var(--reader-link);
+}
+
+.slider-btn:active {
+  background: var(--reader-link);
+  color: #fff;
+}
+
+.slider-input {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--reader-border);
+  border-radius: 2px;
+  outline: none;
+}
+
+.slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--reader-link);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider-input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--reader-link);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* Reset button */
+.reset-btn {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--reader-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--reader-text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.reset-btn:hover {
+  border-color: var(--reader-link);
+  color: var(--reader-link);
+}
+
+/* Desktop settings panel */
+@media screen and (min-width: 600px) {
+  .settings-panel {
+    left: auto;
+    right: 20px;
+    bottom: auto;
+    top: 70px;
+    width: 320px;
+    border-radius: 12px;
+    border: 1px solid var(--reader-border);
+    transform: translateY(-20px);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .settings-panel.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
   }
 }
