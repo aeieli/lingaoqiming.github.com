@@ -1,15 +1,12 @@
 /**
- * Mobile Swipe Navigation for Chapter Pages
- * Supports left/right swipe gestures to navigate between chapters
+ * Chapter Navigation
+ * Supports keyboard arrows and mobile swipe gestures
  */
 (function() {
   'use strict';
 
-  // Only enable on mobile devices
   var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
     .test(navigator.userAgent) || window.innerWidth <= 480;
-
-  if (!isMobile) return;
 
   var touchStartX = 0;
   var touchStartY = 0;
@@ -38,9 +35,38 @@
     // Don't initialize if no navigation available
     if (!prevUrl && !nextUrl) return;
 
-    createIndicators();
-    bindEvents();
-    showSwipeHint();
+    // Keyboard navigation works on all devices
+    bindKeyboardEvents();
+
+    // Touch navigation only on mobile
+    if (isMobile) {
+      createIndicators();
+      bindTouchEvents();
+      showSwipeHint();
+    }
+  }
+
+  function bindKeyboardEvents() {
+    document.addEventListener('keydown', handleKeyDown);
+  }
+
+  function handleKeyDown(e) {
+    // Ignore if user is typing in an input field
+    var tag = e.target.tagName.toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) {
+      return;
+    }
+
+    // Left arrow -> previous page
+    if (e.key === 'ArrowLeft' && prevUrl) {
+      e.preventDefault();
+      navigateTo(prevUrl);
+    }
+    // Right arrow -> next page
+    else if (e.key === 'ArrowRight' && nextUrl) {
+      e.preventDefault();
+      navigateTo(nextUrl);
+    }
   }
 
   function createIndicators() {
@@ -88,7 +114,7 @@
     sessionStorage.setItem('swipeHintShown', 'true');
   }
 
-  function bindEvents() {
+  function bindTouchEvents() {
     document.addEventListener('touchstart', handleTouchStart, { passive: true });
     document.addEventListener('touchmove', handleTouchMove, { passive: true });
     document.addEventListener('touchend', handleTouchEnd, { passive: true });

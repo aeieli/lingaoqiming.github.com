@@ -351,8 +351,56 @@ strong {
   position: fixed;
   top: 150px;
   left: 20px;
+  transition: transform 0.3s ease, width 0.3s ease;
+  z-index: 50;
 }
 
+#sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+#sidebar.collapsed .sidebar-toggle {
+  transform: translateX(calc(100% + 20px));
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 0;
+  right: -36px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 4px;
+  background: var(--reader-header-bg, #353535);
+  color: var(--reader-text, #f0e7d5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.3s ease;
+  z-index: 51;
+}
+
+.sidebar-toggle:hover {
+  background: var(--reader-link, #DF8744);
+}
+
+.sidebar-toggle .icon-expand {
+  display: none;
+}
+
+#sidebar.collapsed .sidebar-toggle .icon-collapse {
+  display: none;
+}
+
+#sidebar.collapsed .sidebar-toggle .icon-expand {
+  display: block;
+}
+
+.sidebar-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
 
 #sidebar a{
   color: #07A5A8;
@@ -383,8 +431,31 @@ strong {
 .wrapper {
   max-width: 750px;
   margin: 0 auto;
+  margin-left: clamp(220px, 20vw, calc((100vw - 750px) / 2));
   position: relative;
   padding: 0 20px;
+  transition: margin-left 0.3s ease;
+}
+
+/* When sidebar is collapsed, center the content */
+body.sidebar-collapsed .wrapper {
+  margin-left: auto;
+}
+
+/* For screens between 900px-1100px, reduce sidebar margin */
+@media screen and (min-width: 901px) and (max-width: 1100px) {
+  .wrapper {
+    margin-left: 200px;
+  }
+
+  #sidebar {
+    left: 10px;
+  }
+
+  .sidebar-content {
+    max-width: 170px;
+    font-size: 14px;
+  }
 }
 
 section {
@@ -760,6 +831,15 @@ footer .credits.right {
     visibility: visible;
   }
 
+  /* Hide desktop sidebar toggle on mobile */
+  .sidebar-toggle {
+    display: none !important;
+  }
+
+  #sidebar.collapsed {
+    transform: none;
+  }
+
   /* Sidebar slide-in menu */
   #sidebar {
     display: block;
@@ -774,6 +854,7 @@ footer .credits.right {
     transition: left 0.3s ease;
     z-index: 999;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    transform: none !important;
   }
 
   #sidebar.active {
@@ -847,6 +928,7 @@ footer .credits.right {
   .wrapper {
     padding: 0 15px;
     max-width: 100%;
+    margin-left: auto;
   }
 
   section #title h1 {
