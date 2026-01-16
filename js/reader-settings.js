@@ -14,10 +14,18 @@
   var defaultSettings = {
     theme: 'dark',
     fontSize: 18,
-    lineHeight: 1.7
+    lineHeight: 1.7,
+    fontFamily: 'noto-sans'
   };
 
   var currentSettings = Object.assign({}, defaultSettings);
+
+  var fonts = {
+    'system': { name: '系统默认', class: 'font-system' },
+    'noto-sans': { name: '思源黑体', class: 'font-noto-sans' },
+    'noto-serif': { name: '思源宋体', class: 'font-noto-serif' },
+    'lxgw': { name: '霞鹜文楷', class: 'font-lxgw' }
+  };
 
   var themes = {
     dark: {
@@ -113,6 +121,15 @@
           </div>\
         </div>\
         <div class="settings-section">\
+          <div class="settings-label">字体</div>\
+          <div class="font-options">\
+            <button class="font-btn" data-font="system">系统默认</button>\
+            <button class="font-btn" data-font="noto-sans">思源黑体</button>\
+            <button class="font-btn" data-font="noto-serif">思源宋体</button>\
+            <button class="font-btn" data-font="lxgw">霞鹜文楷</button>\
+          </div>\
+        </div>\
+        <div class="settings-section">\
           <div class="settings-label">字体大小 <span class="font-size-value">' + currentSettings.fontSize + 'px</span></div>\
           <div class="settings-slider">\
             <button class="slider-btn minus" data-action="fontSize" data-delta="-2">A-</button>\
@@ -145,6 +162,14 @@
     themeBtns.forEach(function(btn) {
       btn.addEventListener('click', function() {
         setTheme(this.getAttribute('data-theme'));
+      });
+    });
+
+    // Font buttons
+    var fontBtns = settingsPanel.querySelectorAll('.font-btn');
+    fontBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        setFont(this.getAttribute('data-font'));
       });
     });
 
@@ -225,6 +250,14 @@
     updatePanelUI();
   }
 
+  function setFont(fontName) {
+    if (!fonts[fontName]) return;
+    currentSettings.fontFamily = fontName;
+    applySettings();
+    saveSettings();
+    updatePanelUI();
+  }
+
   function resetSettings() {
     currentSettings = Object.assign({}, defaultSettings);
     applySettings();
@@ -234,6 +267,7 @@
 
   function applySettings() {
     var theme = themes[currentSettings.theme];
+    var font = fonts[currentSettings.fontFamily];
     var root = document.documentElement;
 
     root.style.setProperty('--reader-bg', theme.bg);
@@ -246,6 +280,14 @@
     root.style.setProperty('--reader-line-height', currentSettings.lineHeight);
 
     document.body.setAttribute('data-theme', currentSettings.theme);
+
+    // Apply font class
+    Object.keys(fonts).forEach(function(key) {
+      document.body.classList.remove(fonts[key].class);
+    });
+    if (font) {
+      document.body.classList.add(font.class);
+    }
   }
 
   function updatePanelUI() {
@@ -255,6 +297,12 @@
     var themeBtns = settingsPanel.querySelectorAll('.theme-btn');
     themeBtns.forEach(function(btn) {
       btn.classList.toggle('active', btn.getAttribute('data-theme') === currentSettings.theme);
+    });
+
+    // Update font buttons
+    var fontBtns = settingsPanel.querySelectorAll('.font-btn');
+    fontBtns.forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-font') === currentSettings.fontFamily);
     });
 
     // Update font size

@@ -8,7 +8,14 @@
   --reader-border: #434343;
   --reader-font-size: 18px;
   --reader-line-height: 1.7;
+  --reader-font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
+
+/* 可选中文字体 */
+.font-system { --reader-font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.font-noto-sans { --reader-font-family: "Noto Sans SC", "PingFang SC", sans-serif; }
+.font-noto-serif { --reader-font-family: "Noto Serif SC", "Songti SC", serif; }
+.font-lxgw { --reader-font-family: "LXGW WenKai", "Noto Sans SC", sans-serif; }
 
 @font-face {
   font-family: 'OpenSansLight';
@@ -250,7 +257,7 @@ table {
 body {
   padding: 0px 0 20px 0px;
   margin: 0px;
-  font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--reader-font-family);
   font-size: var(--reader-font-size);
   line-height: var(--reader-line-height);
   color: var(--reader-text);
@@ -1114,6 +1121,41 @@ footer .credits.right {
 }
 
 .theme-btn.active {
+  border-color: var(--reader-link);
+  background: var(--reader-link);
+  color: #fff;
+}
+
+/* Font buttons */
+.font-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.font-btn {
+  padding: 10px 12px;
+  border: 2px solid var(--reader-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--reader-text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.font-btn[data-font="system"] { font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+.font-btn[data-font="noto-sans"] { font-family: "Noto Sans SC", sans-serif; }
+.font-btn[data-font="noto-serif"] { font-family: "Noto Serif SC", serif; }
+.font-btn[data-font="lxgw"] { font-family: "LXGW WenKai", sans-serif; }
+
+.font-btn:hover {
+  border-color: var(--reader-link);
+}
+
+.font-btn.active {
   border-color: var(--reader-link);
   background: var(--reader-link);
   color: #fff;
